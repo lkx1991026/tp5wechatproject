@@ -1,0 +1,52 @@
+{extend name="public/base" /}
+
+{block name="body"}
+	<div class="main-title">
+		<h2>
+			{$info['id']?'编辑':'新增'}报修
+		</h2>
+	</div>
+	<form action="{:url()}" method="post" class="form-horizontal">
+		<div class="form-item">
+			<label class="item-label">姓名<span class="check-tips">（用于显示的文字）</span></label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="username" value="{$info.username|default=''}">
+			</div>
+		</div>
+		<div class="form-item">
+			<label class="item-label">电话<span class="check-tips">（报修人联系电话）</span></label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="tel" value="{$info.tel|default=''}">
+			</div>
+		</div>
+		<div class="form-item">
+			<label class="item-label">地址<span class="check-tips">（需要维修的地址）</span></label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="addr" value="{$info.addr|default=''}">
+			</div>
+		</div>
+		<div class="form-item">
+			<label class="item-label">标题<span class="check-tips">（报修简要概述）</span></label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="title" value="{$info.title|default=''}">
+			</div>
+		</div>
+		<div class="form-item">
+			<label class="item-label">具体描述<span class="check-tips">（报修详细描述）</span></label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="content" value="{$info.content|default=''}">
+			</div>
+		</div>
+		<div class="form-item">
+			<input type="hidden" name="id" value="{$info.id|default=''}">
+			<button class="btn submit-btn ajax-posts" id="submit" type="submit" target-form="form-horizontal">确 定</button>
+			<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+		</div>
+	</form>
+{/block}
+{block name="script"}
+<script type="text/javascript" charset="utf-8">
+	//导航高亮
+	highlight_subnav('{:url('index')}');
+</script>
+{/block}
