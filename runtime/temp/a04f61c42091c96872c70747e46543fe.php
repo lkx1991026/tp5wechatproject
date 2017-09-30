@@ -1,3 +1,4 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:75:"D:\phpStudy\WWW\tt\public/../application/home/view/default/index\index.html";i:1506759379;}*/ ?>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -37,7 +38,7 @@
             <p class="navbar-text"><a href="faxian.html" class="navbar-link">发现</a></p>
         </div>
         <div class="col-xs-3">
-            <p class="navbar-text"><a href="{:url()}" class="navbar-link">我的</a></p>
+            <p class="navbar-text"><a href="<?php echo url(); ?>" class="navbar-link">我的</a></p>
         </div>
     </div>
 </nav>
@@ -51,7 +52,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-4">
-                    <a href="{:url('notice')}">
+                    <a href="<?php echo url('notice'); ?>">
                     <div class="indexLabel label-danger">
                     <span class="glyphicon glyphicon-bullhorn"></span><br/>
                     小区通知
@@ -67,7 +68,7 @@
                     </a>
                 </div>
                 <div class="col-xs-4">
-                    <a href="{:url(repaire)}">
+                    <a href="<?php echo url(repaire); ?>">
                     <div class="indexLabel label-info">
                     <span class="glyphicon glyphicon-heart-empty"></span><br/>
                     在线报修

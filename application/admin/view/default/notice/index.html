@@ -2,7 +2,7 @@
 
 {block name="body"}
 	<div class="main-title">
-		<h2>报修管理</h2>
+		<h2>小区服务</h2>
 	</div>
 
 	<div class="cf">
@@ -18,31 +18,31 @@
 					<th class="row-selected">
 						<input class="checkbox check-all" type="checkbox">
 					</th>
-					<th>报修人</th>
-					<th>电话</th>
-					<th>地址</th>
-                    <th>标题</th>
-					<th>描述</th>
+					<th>标题</th>
+					<th>图片</th>
+					<th>创建时间</th>
+                    <th>更新时间</th>
+					<th>作者</th>
 					<th>状态</th>
 					<th>操作</th>
 				</tr>
 			</thead>
 			<tbody>
-				{notempty name="list"}
-				{volist name="list" id="v"}
+				{notempty name="info"}
+				{volist name="info" id="v"}
 					<tr>
 						<td><input class="ids row-selected" type="checkbox" name="id[]" id="" value="{$v['id']}"> </td>
-						<td>{$v.username}</td>
-						<td>{$v.tel}</td>
-						<td>{$v.addr}</td>
-                        <td>{$v.title}</td>
-                        <td>{$v.content}</td>
-                        <td>{$v.status?'已处理':'未处理'}</td>
+						<td>{$v.title}</td>
+						<td><img src="{$v['img_path']}" style="height:100px;"></td>
+						<td>{$v.create_time}</td>
+                        <td>{$v.update_time}</td>
+                        <td>{$v.author}</td>
+                        <td>{$v.status?'正常':'过期'}</td>
 						<td>
-							<a title="编辑" href="{:url('edit?id='.$v['id'])}">编辑</a>
+							<a title="编辑" href="{:url('add?id='.$v['id'])}">编辑</a>
 							<!--<a href="{:url('setStatus?ids='.$channel['id'].'&status='.abs(1-$channel['status']))}" class="ajax-get">{$channel.status|show_status_op}</a>-->
 							<a class="confirm ajax-get" title="删除" href="{:url('del?id='.$v['id'])}">删除</a>
-							<a class="confirm ajax-get" title="修改状态" href="{:url('status?id='.$v['id'])}">{$v.status?标记为未处理:标记为已处理}</a>
+							<a class="confirm ajax-get" title="修改状态" href="{:url('status?id='.$v['id'])}">{$v.status?标记为过期:标记为正常}</a>
 						</td>
 					</tr>
 				{/volist}
@@ -52,7 +52,7 @@
 			</tbody>
 		</table>
 	</div>
-<div class="page">{$list->render()}</div>
+<div class="page">{$pager}</div>
 {/block}
 
 {block name="script"}

@@ -8,9 +8,11 @@ class Repaire extends Admin
 {
     public function index()
     {
-        $list = \think\Db::name('repaire')->order('create_time desc')->select();
+        $list=Db::name('repaire')->paginate(2);
 
         $this->assign('list', $list);
+
+
         return $this->fetch();
     }
 
@@ -19,6 +21,11 @@ class Repaire extends Admin
         if (request()->isPost()) {
             $repaire = model('repaire');
             $post_data = \think\Request::instance()->post();
+            if(isset($post_data['home'])){
+                unset($post_data['home']);
+                $home=true;
+
+            }
             //自动验证
             $validate = validate('repaire');
             if (!$validate->check($post_data)) {
@@ -26,7 +33,10 @@ class Repaire extends Admin
             }
             $data = $repaire->create($post_data);
             if ($data) {
-                $this->success('新增成功', url('index'));
+//                var_dump(Request::instance()->dispatch());exit;
+
+                $this->success('新增成功', url($home?'home/index/index.html':'index'));
+
                 //记录行为
 //                action_log('update_channel', 'channel', $data->id, UID);
             } else {
@@ -43,7 +53,8 @@ class Repaire extends Admin
             if(!$validate->check($postdata)){
                 return $this->error($validate->getError());
             }
-            $repaire = \think\Db::name("repaire");
+            $repaire = Db::name("repaire");
+            $postdata['update_time']=time();
             $data = $repaire->update($postdata);
             if($data !== false){
                 $this->success('编辑成功', url('index'));

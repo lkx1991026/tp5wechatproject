@@ -223,6 +223,7 @@ class Article extends Admin {
         $list   =   $this->getDocumentList($cate_id,$model_id,$position,$fields,$group_id);
         // 列表显示处理
         $list   =   $this->parseDocumentList($list,$model_id);
+//        var_dump($list);exit;
         $this->assign('model_id',$model_id);
 		    $this->assign('group_id',$group_id);
         $this->assign('position',$position);
@@ -482,6 +483,7 @@ class Article extends Admin {
     	/* 获取数据对象 */
     	$model_id = input('param.model_id',0);
     	$data = input();
+//    	var_dump($data);exit;
     	if(!$model_id)
     		$this->error('模型id不能为空');
     	//获取模型信息

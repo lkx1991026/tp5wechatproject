@@ -11,6 +11,8 @@ namespace app\home\controller;
 use app\home\model\Document;
 use OT\DataDictionary;
 use think\Config;
+use think\Db;
+
 /**
  * 前台首页控制器
  * 主要获取首页聚合数据
@@ -19,14 +21,28 @@ class Index extends Home{
 
 	//系统首页
     public function index(){
-        $category = model('Category')->getTree();
-        $document = new Document();
-        $lists    = $document->lists(null);
-        $this->assign('category',$category);//栏目
-        $this->assign('lists',$lists);//列表
-        $this->assign('page',model('Document')->page);//分页
+//        $category = model('Category')->getTree();
+//        $document = new Document();
+//        $lists    = $document->lists(null);
+//        $this->assign('category',$category);//栏目
+//        $this->assign('lists',$lists);//列表
+//        $this->assign('page',model('Document')->page);//分页
 
         return $this->fetch();
     }
+    public function notice(){
+        $data=Db::name('notice')->order('update_time','desc')->select();
+        $this->assign('data',$data);
+        return $this->fetch('notice');
+    }
+    public function repaire(){
+        return $this->fetch('repaire');
+    }
+    public function detail($id){
+        $data=Db::name('notice')->find($id);
+        $this->assign('data',$data);
+        return $this->fetch('notice-detail');
+    }
+
 //    public function
 }
